@@ -44,8 +44,8 @@ def main():
 
     parser.add_argument('--load_size', type=int, default=256)
     parser.add_argument('--crop_size', type=int, default=128)
-    parser.add_argument('--input_data_folder', type=str, default='/data/xufang/dsen2cr') 
-    parser.add_argument('--data_list_filepath', type=str, default='../csv/converted-holdOutScenes.csv')
+    parser.add_argument('--input_data_folder', type=str, default='') 
+    parser.add_argument('--data_list_filepath', type=str, default='')
 
     parser.add_argument('--is_test', type=bool, default=True)
     parser.add_argument('--is_use_cloudmask', type=bool, default=False) 
