@@ -2,6 +2,20 @@
 
 This repository contains the codes and models for the paper "GLF-CR: SAR-Enhanced Cloud Removal with Global-Local Fusion" 
 
+If you use the codes for your research, please cite us accordingly:
+
+```
+@article{xu2022glf,
+  title={GLF-CR: SAR-enhanced cloud removal with global--local fusion},
+  author={Xu, Fang and Shi, Yilei and Ebel, Patrick and Yu, Lei and Xia, Gui-Song and Yang, Wen and Zhu, Xiao Xiang},
+  journal={ISPRS Journal of Photogrammetry and Remote Sensing},
+  volume={192},
+  pages={268--278},
+  year={2022},
+  publisher={Elsevier}
+}
+```
+
 
 
 ## Pretrained Model
