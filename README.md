@@ -1,6 +1,7 @@
 # GLF-CR: SAR-Enhanced Cloud Removal with Global-Local Fusion
 
-This repository contains the codes and models for the paper "GLF-CR: SAR-Enhanced Cloud Removal with Global-Local Fusion" 
+This repository contains the codes for the paper "GLF-CR: SAR-Enhanced Cloud Removal with Global-Local Fusion" (in progress)
+
 
 If you use the codes for your research, please cite us accordingly:
 
