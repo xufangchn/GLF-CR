@@ -35,9 +35,9 @@ python setup.py install --user
 
 ## Get Started
 You can download the pretrained model from [here](https://drive.google.com/file/d/11EYrrqLzlqrDgrJNgIW7IY0nSz_S5y9Z/view?usp=sharing)
-
+Use the following command to test the neural network:
 ```
-
+python test_CR.py
 ```
 
 
