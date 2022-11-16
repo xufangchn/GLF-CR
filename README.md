@@ -30,7 +30,15 @@ You can download the pretrained model from [here](https://drive.google.com/file/
 This code has been tested with CUDA 10.1 and Python 3.6.
 
 ```
-TODO requirements.txt
+conda create -n GLF-CR python=3.6
+pip install torch==1.4.0 torchvision==0.5.0
+pip install scipy
+pip install rasterio
+pip install timm==0.3.2
+
+cd ./codes/FAC/kernelconv2d/
+python setup.py clean
+python setup.py install --user
 ```
 
 
