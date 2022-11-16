@@ -40,15 +40,11 @@ Use the following command to test the neural network:
 python test_CR.py
 ```
 
-
-
 ## Credits
 
 ```
-TODO
+This code is based on the codes available in the [STFAN](https://github.com/sczhou/STFAN) repo, [slow-motion](https://github.com/MeiguangJin/slow-motion) and [SwinIR](https://github.com/JingyunLiang/SwinIR). I am grateful to the authors for making the original source code available.
 ```
-
-
 
 ## Contact
 
