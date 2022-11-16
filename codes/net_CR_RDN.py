@@ -12,7 +12,7 @@ import numpy as np
 from timm.models.layers import DropPath, to_2tuple, trunc_normal_
 
 from FAC.kernelconv2d import KernelConv2D
-from submodules import *
+from submodules import df_conv, df_resnet_block
 
 def pixel_reshuffle(input, upscale_factor):
     r"""Rearranges elements in a tensor of shape ``[*, C, H, W]`` to a
@@ -523,7 +523,7 @@ class RDN_residual_CR(nn.Module):
 
 
 if __name__ == "__main__":
-    os.environ["CUDA_VISIBLE_DEVICES"] = '2'
+    os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 
     parser=argparse.ArgumentParser()
     parser.add_argument('--crop_size', type=int, default=128)

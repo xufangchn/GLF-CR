@@ -2,11 +2,11 @@ import os
 import torch
 import argparse
 
-from metrics import *
+from metrics import PSNR, SSIM
 
-from dataloader import *
+from dataloader import AlignedDataset, get_train_val_test_filelists
 
-from net_CR_RDN import *
+from net_CR_RDN import RDN_residual_CR
 
 ##########################################################
 def test(CR_net, opts):
@@ -36,7 +36,7 @@ def test(CR_net, opts):
         print(iters, '  psnr_13:', format(psnr_13,'.4f'), '  ssim_13:', format(ssim_13,'.4f'))
     
 def main():
-    os.environ["CUDA_VISIBLE_DEVICES"] = '4'
+    os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 
     parser = argparse.ArgumentParser()
     
@@ -44,8 +44,8 @@ def main():
 
     parser.add_argument('--load_size', type=int, default=256)
     parser.add_argument('--crop_size', type=int, default=128)
-    parser.add_argument('--input_data_folder', type=str, default='') 
-    parser.add_argument('--data_list_filepath', type=str, default='')
+    parser.add_argument('--input_data_folder', type=str, default='../data') 
+    parser.add_argument('--data_list_filepath', type=str, default='../data/data.csv')
 
     parser.add_argument('--is_test', type=bool, default=True)
     parser.add_argument('--is_use_cloudmask', type=bool, default=False) 
@@ -54,7 +54,7 @@ def main():
     opts = parser.parse_args()
 
     CR_net = RDN_residual_CR(opts.crop_size).cuda()
-    checkpoint = torch.load('CR_net.pth')
+    checkpoint = torch.load('../ckpt/CR_net.pth')
     CR_net.load_state_dict(checkpoint['network'])
 
     CR_net.eval()

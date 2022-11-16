@@ -20,7 +20,6 @@ class ModelBase():
         num_params = 0
         for param in net.parameters():
             num_params += param.numel()
-        # print(net)
         print('[Network] Total number of parameters : %.3f M' % (num_params / 1e6))
         print('-----------------------------------------------')
 

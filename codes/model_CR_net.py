@@ -17,11 +17,6 @@ class ModelCRNet(ModelBase):
         # create network
         self.net_G = RDN_residual_CR(self.opts.crop_size).cuda()
         self.print_networks(self.net_G)
-
-        # load pre-trained model
-        if self.opts.load_pretrained_model:
-            checkpoint = torch.load(self.opts.pretrained_model)
-            self.net_G.load_state_dict(checkpoint['network'])
         
         # Parallel training
         if len(self.opts.gpu_ids) > 1:
@@ -29,10 +24,7 @@ class ModelCRNet(ModelBase):
             self.net_G = nn.DataParallel(self.net_G)
 
         # initialize optimizers
-        if self.opts.optimizer == 'SGD':
-            self.optimizer_G = torch.optim.SGD(self.net_G.parameters(), lr=opts.lr, momentum=0.9)
-            self.lr_scheduler = lr_scheduler.StepLR(self.optimizer_G, step_size=self.opts.lr_step, gamma=0.1)
-        elif self.opts.optimizer == 'Adam':
+        if self.opts.optimizer == 'Adam':
             self.optimizer_G = torch.optim.Adam(self.net_G.parameters(), lr=opts.lr)
             self.lr_scheduler = lr_scheduler.StepLR(self.optimizer_G, step_size=self.opts.lr_step, gamma=0.5)
             

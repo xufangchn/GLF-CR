@@ -7,7 +7,6 @@ import torch.nn as nn
 import torch
 import numpy as np
 import torch.nn.functional as F
-# from config import cfg
 
 LEAKY_VALUE = 0.1
 

@@ -1,19 +1,15 @@
 import os
-from PIL import Image
-from feature_detectors import get_cloud_cloudshadow_mask
-
-import csv
-import rasterio
 import numpy as np
+
+import argparse
+import random
+import rasterio
+import csv
 
 import torch
 from torch.utils.data import Dataset
-import torchvision.transforms.functional as F
 
-import random
-import argparse
-import time
-
+from feature_detectors import get_cloud_cloudshadow_mask
 
 class AlignedDataset(Dataset):
 
@@ -124,8 +120,10 @@ class AlignedDataset(Dataset):
             data_image /= self.scale
 
         return data_image
-
-def get_train_val_test_filelists(listpath, is_use_validation=True):
+'''
+read data.csv
+'''
+def get_train_val_test_filelists(listpath):
 
     csv_file = open(listpath, "r")
     list_reader = csv.reader(csv_file)
@@ -138,10 +136,7 @@ def get_train_val_test_filelists(listpath, is_use_validation=True):
         if line_entries[0] == '1':
             train_filelist.append(line_entries)
         elif line_entries[0] == '2':
-            if is_use_validation:
-                val_filelist.append(line_entries)
-            else:
-                train_filelist.append(line_entries)
+            val_filelist.append(line_entries)
         elif line_entries[0] == '3':
             test_filelist.append(line_entries)
 
@@ -154,9 +149,9 @@ if __name__ == "__main__":
     parser=argparse.ArgumentParser()
     parser.add_argument('--load_size', type=int, default=256)
     parser.add_argument('--crop_size', type=int, default=128)
-    parser.add_argument('--input_data_folder', type=str, default='')
-    parser.add_argument('--data_list_filepath', type=str, default='')
-    parser.add_argument('--is_test', type=bool, default=False)
+    parser.add_argument('--input_data_folder', type=str, default='../data')
+    parser.add_argument('--data_list_filepath', type=str, default='../data/data.csv')
+    parser.add_argument('--is_test', type=bool, default=True)
     parser.add_argument('--is_use_cloudmask', type=bool, default=True)
     parser.add_argument('--cloud_threshold', type=float, default=0.2)
     opts = parser.parse_args() 
@@ -168,18 +163,22 @@ if __name__ == "__main__":
     train_filelist, val_filelist, test_filelist = get_train_val_test_filelists(opts.data_list_filepath)
 
     ##===================================================##
-    data = AlignedDataset(opts, train_filelist)
+    data = AlignedDataset(opts, test_filelist)
     dataloader = torch.utils.data.DataLoader(dataset=data, batch_size=1,shuffle=False)
 
     ##===================================================##
     _iter = 0
     for results in dataloader:
         cloudy_data = results['cloudy_data']
-        cloudFree_data = results['cloudfree_data']
+        cloudfree_data = results['cloudfree_data']
         SAR = results['SAR_data']
-        cloud_mask = results['cloud_mask']
+        if opts.is_use_cloudmask:
+            cloud_mask = results['cloud_mask']
         file_name = results['file_name']
-        print(_iter, cloudy_data.shape, cloudFree_data.shape, SAR.shape, cloud_mask.shape, file_name)
-        
+        print(_iter, file_name)
+        print('cloudy:', cloudy_data.shape)
+        print('cloudfree:', cloudfree_data.shape)
+        print('sar:', SAR.shape)
+        if opts.is_use_cloudmask:
+            print('cloud_mask:', cloud_mask.shape)
         _iter += 1
-        print(_iter)
