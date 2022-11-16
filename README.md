@@ -17,14 +17,6 @@ If you use the codes for your research, please cite us accordingly:
 }
 ```
 
-
-
-## Pretrained Model
-
-You can download the pretrained model from [here](https://drive.google.com/file/d/11EYrrqLzlqrDgrJNgIW7IY0nSz_S5y9Z/view?usp=sharing)
-
-
-
 ## Prerequisites & Installation
 
 This code has been tested with CUDA 10.1 and Python 3.6.
@@ -41,12 +33,11 @@ python setup.py clean
 python setup.py install --user
 ```
 
-
-
 ## Get Started
+You can download the pretrained model from [here](https://drive.google.com/file/d/11EYrrqLzlqrDgrJNgIW7IY0nSz_S5y9Z/view?usp=sharing)
 
 ```
-TODO
+
 ```
 
 
